@@ -233,5 +233,30 @@
       "pac man",
       "pacman"
     ]
+  },
+    {
+    "id": "p2d",
+    "title": "Portal2d",
+    "type": "game",
+    "image": "assets/covers/download (3).jpg",
+    "description": "Portal but 2d.",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Platformers",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "html/portal2d.html",
+    "openInNewTab": true,
+    "aliases": [
+      "portal"
+    ]
   }
 ]

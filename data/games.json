@@ -384,5 +384,57 @@
       "pc",
       "papas cheeseria"
     ]
+  },
+  {
+    "id": "dl1",
+    "title": "Duck Life 1",
+    "type": "game",
+    "image": "assets/covers/download (1).png",
+    "description": "Duck Life the classic flash game.",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Platformers",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "html/dl1.html",
+    "openInNewTab": true,
+    "aliases": [
+      "dl1",
+      "duck life 1"
+    ]
+  },
+   {
+    "id": "dl2",
+    "title": "Duck Life 2",
+    "type": "game",
+    "image": "assets/covers/images (29).jpg",
+    "description": "Duck Life the classic flash game.",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Platformers",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "html/dl1.html",
+    "openInNewTab": true,
+    "aliases": [
+      "dl2",
+      "duck life 2"
+    ]
   }
 ]

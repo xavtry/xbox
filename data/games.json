@@ -18,7 +18,7 @@
     ],
     "collection": "Platformers",
     "dateAdded": "2026-10-17",
-    "launchType": "url",
+    "launchType": "local-page",
     "launchUrl": "games/2048/index.html",
     "openInNewTab": true,
     "aliases": [

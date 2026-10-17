@@ -103,5 +103,57 @@
       "gd",
       "Geomtry Dash"
     ]
+  },
+  {
+    "id": "2048",
+    "title": "2048",
+    "type": "game",
+    "image": "games/2048/favicon.ico",
+    "description": "Just nice classic 2048.",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Platformers",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "games/2048/index.html",
+    "openInNewTab": true,
+    "aliases": [
+      "2048",
+      "two zero four eight"
+    ]
+  },
+  {
+    "id": "btd1",
+    "title": "Bloons TD1",
+    "type": "game",
+    "image": "assets/covers/mc.avif",
+    "description": "Minecraft 26.2, dont ask how...",
+    "developer": "Mojang",
+    "releaseYear": 2026,
+    "genres": [
+      "Sandbox",
+      "Skill"
+    ],
+    "tags": [
+      "sandbox"
+    ],
+    "collection": "Sandbox",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "html/btd.html",
+    "openInNewTab": true,
+    "aliases": [
+      "bloons",
+      "bloons tower defense 1",
+      "td"
+    ]
   }
 ]

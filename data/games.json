@@ -29,6 +29,7 @@
   {
     "id": "mc26",
     "title": "Minecraft 26.2",
+    "type": "game",
     "image": "assets/covers/mc.avif",
     "description": "Minecraft 26.2, dont ask how...",
     "developer": "Mojang",

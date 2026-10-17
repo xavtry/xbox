@@ -1,11 +1,11 @@
 [
   {
-    "id": "ovo-3",
-    "title": "OvO 3 Dimensions",
+    "id": "2048",
+    "title": "2048",
     "type": "game",
     "image": "assets/covers/ovo.svg",
-    "description": "A precision platform adventure built around momentum, timing, and clean movement.",
-    "developer": "GSN Community",
+    "description": "Just nice classic 2048.",
+    "developer": "yabo",
     "releaseYear": null,
     "genres": [
       "Platformer",
@@ -19,203 +19,10 @@
     "collection": "Platformers",
     "dateAdded": "2026-10-17",
     "launchType": "url",
-    "launchUrl": "https://www.coolmathgames.com/0-ovo",
+    "launchUrl": "games/2048/favicon.ico",
     "openInNewTab": true,
     "aliases": [
-      "OvO 3",
-      "OvO Three"
+      "2048",
+      "two zero four eight"
     ]
-  },
-  {
-    "id": "jetpack-joyride",
-    "title": "Jetpack Joyride",
-    "type": "game",
-    "image": "assets/covers/jetpack.svg",
-    "description": "Dodge hazards, collect coins, and see how far your jetpack can take you.",
-    "developer": "Halfbrick",
-    "releaseYear": 2011,
-    "genres": [
-      "Arcade",
-      "Endless runner"
-    ],
-    "tags": [
-      "arcade",
-      "runner"
-    ],
-    "collection": "Arcade",
-    "dateAdded": "2026-10-17",
-    "launchType": "url",
-    "launchUrl": "https://poki.com/en/g/jetpack-joyride",
-    "openInNewTab": true,
-    "aliases": [
-      "Jetpack"
-    ]
-  },
-  {
-    "id": "pocket-archer",
-    "title": "Pocket Archer",
-    "type": "game",
-    "image": "assets/covers/archer.svg",
-    "description": "A bright little archery challenge. Replace the launch URL in data/games.json to use your preferred version.",
-    "developer": "GSN Community",
-    "genres": [
-      "Arcade"
-    ],
-    "tags": [
-      "action",
-      "skill"
-    ],
-    "collection": "Arcade",
-    "dateAdded": "2026-10-17",
-    "launchType": "url",
-    "launchUrl": "",
-    "openInNewTab": true,
-    "aliases": [
-      "Archer"
-    ]
-  },
-  {
-    "id": "ovo-2",
-    "title": "OvO 2",
-    "type": "game",
-    "image": "assets/covers/ovo2.svg",
-    "description": "A fast-paced platforming challenge with tight controls and clean movement.",
-    "developer": "Dedra Games",
-    "genres": [
-      "Platformer"
-    ],
-    "tags": [
-      "platformer",
-      "parkour"
-    ],
-    "collection": "Platformers",
-    "dateAdded": "2026-10-17",
-    "launchType": "url",
-    "launchUrl": "https://www.coolmathgames.com/0-ovo-2",
-    "openInNewTab": true,
-    "aliases": [
-      "OvO Two"
-    ]
-  },
-  {
-    "id": "minecraft",
-    "title": "Minecraft",
-    "type": "game",
-    "image": "assets/covers/minecraft.svg",
-    "description": "The official Minecraft website. A locally playable browser version is not configured in this launcher.",
-    "developer": "Mojang Studios",
-    "genres": [
-      "Sandbox",
-      "Survival"
-    ],
-    "tags": [
-      "building",
-      "survival",
-      "crafting"
-    ],
-    "collection": "Sandbox",
-    "dateAdded": "2026-10-17",
-    "launchType": "url",
-    "launchUrl": "https://www.minecraft.net/",
-    "openInNewTab": true,
-    "aliases": [
-      "MC"
-    ]
-  },
-  {
-    "id": "snake-gsn",
-    "title": "Snake: GSN Arcade",
-    "type": "game",
-    "image": "assets/covers/snake.svg",
-    "description": "A tiny arcade classic built into GSN. No downloads or external site required.",
-    "developer": "GSN Arcade",
-    "releaseYear": 2026,
-    "genres": [
-      "Arcade",
-      "Classic"
-    ],
-    "tags": [
-      "snake",
-      "arcade",
-      "offline"
-    ],
-    "collection": "Arcade",
-    "dateAdded": "2026-10-17",
-    "launchType": "builtin",
-    "launchUrl": "snake",
-    "openInNewTab": false,
-    "aliases": [
-      "Snake",
-      "GSN Snake"
-    ]
-  },
-  {
-    "id": "rhythm-battle",
-    "title": "Rhythm Battle",
-    "type": "game",
-    "image": "assets/covers/rhythm.svg",
-    "description": "A music-driven rhythm game listing. Set a real launch URL before playing this entry.",
-    "developer": "GSN Community",
-    "genres": [
-      "Rhythm"
-    ],
-    "tags": [
-      "music",
-      "rhythm"
-    ],
-    "collection": "Music",
-    "dateAdded": "2026-10-17",
-    "launchType": "url",
-    "launchUrl": "",
-    "openInNewTab": true,
-    "aliases": [
-      "Rhythm"
-    ]
-  },
-  {
-    "id": "amanda-adventure",
-    "title": "Amanda's Adventure",
-    "type": "game",
-    "image": "assets/covers/amanda.svg",
-    "description": "A mysterious adventure entry for your personal library. Set a real launch URL before playing this entry.",
-    "developer": "GSN Community",
-    "genres": [
-      "Adventure"
-    ],
-    "tags": [
-      "adventure",
-      "mystery"
-    ],
-    "collection": "Adventure",
-    "dateAdded": "2026-10-17",
-    "launchType": "url",
-    "launchUrl": "",
-    "openInNewTab": true,
-    "aliases": [
-      "Amanda"
-    ]
-  },
-  {
-    "id": "gsn-notes",
-    "title": "GSN Notes",
-    "type": "app",
-    "image": "assets/covers/app.svg",
-    "description": "An example app entry. Replace its metadata and launch target with an app you use.",
-    "developer": "GSN Community",
-    "genres": [
-      "Productivity"
-    ],
-    "tags": [
-      "app",
-      "notes"
-    ],
-    "collection": "Apps",
-    "dateAdded": "2026-10-17",
-    "launchType": "url",
-    "launchUrl": "https://keep.google.com/",
-    "openInNewTab": true,
-    "aliases": [
-      "Notes"
-    ]
-  }
-]
+  

@@ -169,7 +169,7 @@
     const recents = state.recents.map(x => getGame(x.id)).filter(Boolean).slice(0, 6);
     const homeMode = state.backgroundMode;
     const customBackground = homeMode === 'custom' && validImagePath(state.backgroundImage) ? `style="background-image:linear-gradient(90deg,rgba(1,13,12,.93),rgba(1,20,16,.84)),url('${escapeHTML(state.backgroundImage)}');background-size:cover;background-position:center"` : '';
-    const homeGames = state.homeGroups.games ? `<div class="feature-row" aria-label="Favorite games">${games.map((g, i) => `<button class="feature-tile ${i === 0 ? 'is-featured' : ''}" data-action="open-game" data-id="${escapeHTML(g.id)}" aria-label="Open ${escapeHTML(g.title)}"><img src="${escapeHTML(gameArt(g))}" alt="" loading="lazy" onerror="this.src='assets/covers/gsn.svg'"><span class="tile-label">${escapeHTML(g.title)}</span></button>`).join('')}</div>` : '';
+    const homeGames = state.homeGroups.games ? `<div class="feature-row" aria-label="Games — select a tile to launch">${games.map((g, i) => `<button class="feature-tile ${i === 0 ? 'is-featured' : ''}" data-action="launch" data-id="${escapeHTML(g.id)}" aria-label="Launch ${escapeHTML(g.title)}"><img src="${escapeHTML(gameArt(g))}" alt="" loading="lazy" onerror="this.src='assets/covers/gsn.svg'"><span class="tile-label">${escapeHTML(g.title)}</span></button>`).join('')}</div>` : '';
     const panels = [];
     if (state.homeGroups.customize) panels.push(`<button class="home-panel" data-route="personalization"><span class="panel-graphic">${icon('monitor')}</span><strong>Customize your Home</strong></button>`);
     if (state.homeGroups.music) panels.push(`<button class="home-panel music" data-route="music"><span class="panel-graphic">${icon('music')}</span><strong>Music coming soon</strong></button>`);
@@ -336,15 +336,21 @@
       launchSwfGame(g, resolveProjectPath(target));
       return;
     }
-    if (/^https?:\/\//i.test(target) && (g.launchType === 'new-tab' || (g.openInNewTab !== false && g.launchType !== 'iframe'))) {
-      const win = window.open(target, '_blank', 'noopener,noreferrer');
-      if (win) toast(`Opening ${g.title} in a new tab.`);
-      else toast('Your browser blocked the new tab. Allow pop-ups for this GitHub Pages site and try again.');
+    const targetUrl = resolveProjectPath(target);
+    // External URLs and project-relative browser game paths can both be opened in a new tab.
+    // Explicit iframe/local-page modes stay inside GSN; openInNewTab:false also requests embedding.
+    const shouldOpenNewTab = g.launchType === 'new-tab' ||
+      (g.launchType !== 'iframe' && g.launchType !== 'local-page' && g.openInNewTab !== false);
+    if (shouldOpenNewTab) {
+      const win = window.open(targetUrl, '_blank');
+      if (win) {
+        try { win.opener = null; } catch { /* Some browsers restrict opener access. */ }
+        toast(`Opening ${g.title} in a new tab.`);
+      } else toast('Your browser blocked the new tab. Allow pop-ups for this GitHub Pages site and try again.');
       return;
     }
-    const targetUrl = resolveProjectPath(target);
     if (g.launchType === 'iframe' || g.launchType === 'local-page' || g.openInNewTab === false) {
-      showOverlay(g.title, `<p class="muted" style="margin-top:0">Some websites do not allow embedding. If this game stays blank, edit its launch settings to open in a new tab.</p><iframe src="${escapeHTML(targetUrl)}" title="${escapeHTML(g.title)}" style="width:100%;height:min(65vh,620px);border:0;background:#111" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-popups allow-downloads"></iframe><p><a href="${escapeHTML(targetUrl)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Open this game in a new tab ↗</a></p>`);
+      showOverlay(g.title, `<p class="muted" style="margin-top:0">Some websites do not allow embedding. If this game stays blank, use the link below or edit its launch settings to open in a new tab.</p><iframe src="${escapeHTML(targetUrl)}" title="${escapeHTML(g.title)}" style="width:100%;height:min(65vh,620px);border:0;background:#111" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-popups allow-downloads"></iframe><p><a href="${escapeHTML(targetUrl)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Open this game in a new tab ↗</a></p>`);
     } else toast('That launch type is not supported in a browser.');
   }
   function validLaunchTarget(target, type) {

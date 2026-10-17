@@ -136,7 +136,7 @@
     "type": "game",
     "image": "assets/covers/btd1.jpg",
     "description": "Minecraft 26.2, dont ask how...",
-    "developer": "Mojang",
+    "developer": "Ninja Kiwi",
     "releaseYear": 2026,
     "genres": [
       "Sandbox",
@@ -359,6 +359,31 @@
     "aliases": [
       "tf",
       "tiny fishing"
+    ],
+     {
+    "id": "pc",
+    "title": "Papa's Cheeseria",
+    "type": "game",
+    "image": "games/Papa'sCheeseria/icon.png",
+    "description": "Classic Papa's game.",
+    "developer": "yaboy",
+    "releaseYear": 2026,
+    "genres": [
+      "Sandbox",
+      "Skill"
+    ],
+    "tags": [
+      "sandbox"
+    ],
+    "collection": "Sandbox",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "games/Papa'sCheeseria/index.html",
+    "openInNewTab": true,
+    "aliases": [
+      "pc",
+      "papas cheeseria"
     ]
+  }
   }
 ]

@@ -77,5 +77,31 @@
       "Cookie Clicker",
       "click cookie"
     ]
+  },
+  {
+    "id": "gd",
+    "title": "Geometry Dash",
+    "type": "game",
+    "image": "assets/covers/geometrydash-1639510868467.webp",
+    "description": "lol js play the game",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Platformers",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "games/geometrydash/index.html",
+    "openInNewTab": true,
+    "aliases": [
+      "gd",
+      "Geomtry Dash"
+    ]
   }
 ]

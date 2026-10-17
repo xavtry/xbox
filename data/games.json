@@ -44,7 +44,7 @@
     "collection": "Sandbox",
     "dateAdded": "2026-10-17",
     "launchType": "local-page",
-    "launchUrl": "eaglercraft26-2.html",
+    "launchUrl": "./eaglercraft26-2.html",
     "openInNewTab": true,
     "aliases": [
       "mc",

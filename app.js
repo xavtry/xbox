@@ -169,13 +169,13 @@
     const recents = state.recents.map(x => getGame(x.id)).filter(Boolean).slice(0, 6);
     const homeMode = state.backgroundMode;
     const customBackground = homeMode === 'custom' && validImagePath(state.backgroundImage) ? `style="background-image:linear-gradient(90deg,rgba(1,13,12,.93),rgba(1,20,16,.84)),url('${escapeHTML(state.backgroundImage)}');background-size:cover;background-position:center"` : '';
-    const homeGames = state.homeGroups.games ? `<div class="feature-row" aria-label="Favorite games">${games.map((g, i) => `<button class="feature-tile ${i === 0 ? 'is-focused' : ''}" data-action="open-game" data-id="${escapeHTML(g.id)}" aria-label="Open ${escapeHTML(g.title)}"><img src="${escapeHTML(gameArt(g))}" alt="" loading="lazy" onerror="this.src='assets/covers/gsn.svg'"><span class="tile-label">${escapeHTML(g.title)}</span></button>`).join('')}</div>` : '';
+    const homeGames = state.homeGroups.games ? `<div class="feature-row" aria-label="Favorite games">${games.map((g, i) => `<button class="feature-tile ${i === 0 ? 'is-featured' : ''}" data-action="open-game" data-id="${escapeHTML(g.id)}" aria-label="Open ${escapeHTML(g.title)}"><img src="${escapeHTML(gameArt(g))}" alt="" loading="lazy" onerror="this.src='assets/covers/gsn.svg'"><span class="tile-label">${escapeHTML(g.title)}</span></button>`).join('')}</div>` : '';
     const panels = [];
     if (state.homeGroups.customize) panels.push(`<button class="home-panel" data-route="personalization"><span class="panel-graphic">${icon('monitor')}</span><strong>Customize your Home</strong></button>`);
-if (state.homeGroups.music) panels.push(`<button class="home-panel music" data-route="music"><span class="panel-graphic">${icon('music')}</span><strong>Music coming soon</strong></button>`);  
-if (state.homeGroups.chat) panels.push(`<button class="home-panel chat" data-route="chat"><span class="panel-graphic">${icon('chat')}</span><strong>Great updates coming from yaboy</strong></button>`);
+    if (state.homeGroups.music) panels.push(`<button class="home-panel music" data-route="music"><span class="panel-graphic">${icon('music')}</span><strong>Music coming soon</strong></button>`);
+    if (state.homeGroups.chat) panels.push(`<button class="home-panel chat" data-route="chat"><span class="panel-graphic">${icon('chat')}</span><strong>Great updates coming from yaboy</strong></button>`);
     if (!panels.length) panels.push(`<button class="home-panel browse" data-route="library"><span class="panel-graphic">${icon('library')}</span><strong>Browse your games</strong></button>`);
-    $('#app').innerHTML = `${statusArea()}<main class="app-shell shell-home mode-${escapeHTML(homeMode)}" ${customBackground}><div class="home-content"><div class="home-top"><button class="profile-chip" data-route="profile">${avatarHTML()}<span><span class="username">${escapeHTML(state.profile.username)}</span><span class="online-label">${statusDot()}${escapeHTML(state.profile.status)}</span></span></button><nav class="top-nav" aria-label="Main navigation"><button class="round-nav" data-route="library" title="Library" aria-label="Library">${icon('library')}</button><button class="round-nav" data-action="store" title="Store" aria-label="Store">${icon('store')}</button><button class="round-nav" data-route="friends" title="Community" aria-label="Community">${icon('community')}</button><button class="round-nav" data-route="search" title="Search" aria-label="Search">${icon('search')}</button><button class="round-nav" data-route="settings" title="Settings" aria-label="Settings">${icon('settings')}</button></nav><div class="home-right"><button class="quiet-icon" data-route="friends" aria-label="Notifications">♧</button><span>⌁</span><span id="clock">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div></div><section class="home-middle">${homeGames}<div class="bottom-panels"><button class="home-panel browse" data-route="library"><span class="panel-graphic">${icon('library')}</span><strong>Browse your games</strong></button>${panels.join('')}</div></section>${hints()}</div></main>`;
+    $('#app').innerHTML = `${statusArea()}<main class="app-shell shell-home mode-${escapeHTML(homeMode)}" ${customBackground}><div class="home-content"><div class="home-top"><button class="profile-chip" data-route="profile">${avatarHTML()}<span><span class="username">${escapeHTML(state.profile.username)}</span><span class="online-label">${statusDot()}${escapeHTML(state.profile.status)}</span></span></button><nav class="top-nav" aria-label="Main navigation"><button class="round-nav" data-route="library" title="Library" aria-label="Library">${icon('library')}</button><button class="round-nav" data-route="store" title="Store" aria-label="Store">${icon('store')}</button><button class="round-nav" data-route="friends" title="Community" aria-label="Community">${icon('community')}</button><button class="round-nav" data-route="search" title="Search" aria-label="Search">${icon('search')}</button><button class="round-nav" data-route="settings" title="Settings" aria-label="Settings">${icon('settings')}</button></nav><div class="home-right"><button class="quiet-icon" data-route="friends" aria-label="Notifications">♧</button><span>⌁</span><span id="clock">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div></div><section class="home-middle">${homeGames}<div class="bottom-panels"><button class="home-panel browse" data-route="library"><span class="panel-graphic">${icon('library')}</span><strong>Browse your games</strong></button>${panels.join('')}</div></section>${hints()}</div></main>`;
     applyTheme();
     const shell = $('.shell-home');
     if (shell && homeMode === 'game-art' && selected) shell.style.backgroundImage = `linear-gradient(90deg,rgba(0,14,13,.90),rgba(0,20,15,.75)),url("${gameArt(selected)}")`;
@@ -215,6 +215,7 @@ if (state.homeGroups.chat) panels.push(`<button class="home-panel chat" data-rou
     setTitle(titles[mode] || 'Library');
     const collections = ['All collections','Favorites','Recently added','Recently played','All games', ...new Set([...state.customCollections, ...allGames().map(g => g.collection).filter(Boolean)])];
     const viewList = state.settings.defaultListView;
+    $('#app').innerHTML = `${statusArea()}<main class="library-layout">${sidebar(mode)}<section class="library-main"><h1 class="library-title">${titles[mode]}</h1><div class="search-toolbar"><div class="search-box">${icon('search')}<input id="library-search" type="search" data-action="search-input" placeholder="Search GSN" value="${escapeHTML(searchText)}" aria-label="Search GSN"><button class="quiet-icon" data-action="clear-search" aria-label="Clear search">×</button></div><button class="toolbar-button" data-action="keyboard">Keyboard</button><button class="toolbar-button" data-action="toggle-view">${viewList ? 'Grid' : 'List'}</button></div><div class="filter-row"><select class="select-control" data-action="sort"><option ${sortMode==='Name'?'selected':''}>Name</option><option ${sortMode==='Recently added'?'selected':''}>Recently added</option><option ${sortMode==='Recently played'?'selected':''}>Recently played</option><option ${sortMode==='Release year'?'selected':''}>Release year</option></select><select class="select-control" data-action="collection"><option ${collectionMode==='All collections'?'selected':''}>All collections</option>${collections.filter(c=>c!=='All collections').map(c=>`<option ${collectionMode===c?'selected':''}>${escapeHTML(c)}</option>`).join('')}</select><span class="results-count">${resultGames.length.toLocaleString()} ITEMS</span></div><div class="game-grid ${viewList?'list-view':''}">${renderGameCards(resultGames.slice(0,libraryPageSize), viewList)}</div>${resultGames.length>libraryPageSize?`<div style="text-align:center;padding:8px 0 35px"><button class="secondary-button" data-action="load-more">Load more games (${Math.min(libraryPageSize,resultGames.length)} of ${resultGames.length})</button></div>`:''}</section></main><nav class="bottom-nav-strip"><button data-route="music">GSN Music</button><button data-route="movies">Movies</button><button data-route="chat">Chat</button><button data-route="settings">Settings</button><button data-route="profile">Profile</button><button data-route="personalization">Personalization</button><button data-route="settings">Audio</button></nav>`;
     applyTheme();
   }
   function renderGameCards(games, list = false) {
@@ -279,6 +280,11 @@ if (state.homeGroups.chat) panels.push(`<button class="home-panel chat" data-rou
     applyTheme();
     const msg = $('#chat-messages'); if (msg) msg.scrollTop = msg.scrollHeight;
   }
+  function renderStore() {
+    setTitle('GSN Store');
+    $('#app').innerHTML = `${statusArea()}<main class="page-content">${header('GSN Store')}<p class="crumb">Discover / Store</p><h2 class="panel-heading">The store is coming soon</h2><p class="details-description">GSN does not have a connected store or payment system yet. This page is a placeholder, so no purchases are offered or processed.</p><div class="notice">You can still add games to your library from Manage games, using a JSON file or the in-launcher form.</div><div class="manage-toolbar"><button class="primary-button" data-route="library">Browse your games</button><button class="secondary-button" data-route="manage">Manage games</button></div>${hints()}</main>`;
+    applyTheme();
+  }
   function renderMovies() {
     setTitle('Movies');
     $('#app').innerHTML = `${statusArea()}<main class="panel-page">${header('Movies')}<h2 class="panel-heading">Movies &amp; TV</h2><div class="empty-state" style="max-width:750px"><strong>No media catalog configured</strong><span>GSN Movies is a placeholder. Add your own links or connect a media catalog in a future version.</span></div>${hints()}</main>`;
@@ -300,6 +306,7 @@ if (state.homeGroups.chat) panels.push(`<button class="home-panel chat" data-rou
       case 'profile': renderProfile(); break;
       case 'personalization': renderPersonalization(); break;
       case 'settings': renderSettings(); break;
+      case 'store': renderStore(); break;
       case 'manage': renderManage(); break;
       case 'friends': renderFriends(); break;
       case 'music': renderMusic(); break;
@@ -590,9 +597,11 @@ if (state.homeGroups.chat) panels.push(`<button class="home-panel chat" data-rou
   }
 
   document.addEventListener('click', e => {
-    const routeButton=e.target.closest('[data-route]');
+    const origin = e.target instanceof Element ? e.target : e.target?.parentElement;
+    if (!origin) return;
+    const routeButton=origin.closest('[data-route]');
     if(routeButton){e.preventDefault();closeOverlay();navigate(routeButton.dataset.route);return;}
-    const actionButton=e.target.closest('[data-action]');
+    const actionButton=origin.closest('[data-action]');
     if(actionButton){
       // Inputs and selects use their native interactions; their change/input events handle state.
       if(['INPUT','SELECT','TEXTAREA'].includes(actionButton.tagName)) return;

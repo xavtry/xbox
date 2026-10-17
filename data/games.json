@@ -308,5 +308,31 @@
     "aliases": [
       "sandboxels"
     ]
+  },
+  {
+    "id": "bb",
+    "title": "Burrito Bison",
+    "type": "game",
+    "image": "games/BurritoBison/icon.png",
+    "description": "Just nice Burriot Bison.",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Platformers",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "games/BurritoBison/index.html",
+    "openInNewTab": true,
+    "aliases": [
+      "burrito bison",
+      "bb"
+    ]
   }
 ]

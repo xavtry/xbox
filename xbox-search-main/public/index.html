@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Ultraviolet | Console Interface</title>
+    <meta name="description" content="Ultraviolet web interface." />
+    <meta name="theme-color" content="#07120c" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="index.css" />
+
+    <!-- Keep these project scripts: they power Ultraviolet's existing search flow. -->
+    <script src="baremux/index.js"></script>
+    <script src="uv/uv.bundle.js"></script>
+    <script src="uv/uv.config.js"></script>
+  </head>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand-mini" href="#home" aria-label="Ultraviolet home">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-wordmark">ULTRAVIOLET<span class="brand-tm"> / TN</span></span>
+        </a>
+        <div class="system-status" aria-label="Interface status">
+          <span class="status-dot"></span>
+          <span>SYSTEM ONLINE</span>
+          <span class="status-divider"></span>
+          <span class="status-mode">CONSOLE MODE</span>
+        </div>
+      </header>
+
+      <main id="home" class="main-content">
+        <section class="hero-copy" aria-labelledby="page-title">
+          <p class="eyebrow"><span class="eyebrow-line"></span> YOUR WINDOW TO THE WEB</p>
+          <div class="hero-heading-row">
+            <div class="hero-emblem" aria-hidden="true">
+              <span class="emblem-ring"></span>
+              <span class="emblem-core"></span>
+              <span class="emblem-cross emblem-cross-a"></span>
+              <span class="emblem-cross emblem-cross-b"></span>
+            </div>
+            <div>
+              <h1 id="page-title">Ultraviolet<span class="heading-dot">.</span></h1>
+              <p class="subtitle">A familiar interface. A new way to browse.</p>
+            </div>
+          </div>
+          <p class="hero-description">A clean, console-inspired starting point for your web session.</p>
+        </section>
+
+        <section class="search-card glass-panel" aria-label="Browse the web">
+          <div class="card-topline">
+            <div class="card-label"><span class="tiny-square"></span> QUICK SEARCH</div>
+            <div class="card-badge"><span class="badge-dot"></span> READY</div>
+          </div>
+          <form id="uv-form" class="search-form" autocomplete="off">
+            <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden" />
+            <label class="search-icon" for="uv-address" aria-label="Search">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.4 4.4"></path></svg>
+            </label>
+            <input id="uv-address" type="text" placeholder="Search or enter a website address" spellcheck="false" aria-label="Search or enter a website address" />
+            <button class="launch-button" type="submit" aria-label="Go">
+              <span>GO</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12h14M12.5 5.8l6.2 6.2-6.2 6.2"></path></svg>
+            </button>
+          </form>
+          <div class="search-foot">
+            <span><kbd>ENTER</kbd> to continue</span>
+            <span class="search-foot-right"><span class="mini-pulse"></span> SECURE SESSION UI</span>
+          </div>
+          <div class="search-glow" aria-hidden="true"></div>
+        </section>
+
+        <section class="quick-row" aria-label="Quick links">
+          <div class="section-heading"><span>EXPLORE</span><span class="section-rule"></span><span class="section-muted">QUICK ACCESS</span></div>
+          <div class="quick-cards">
+            <a class="quick-card glass-panel" href="https://www.google.com/" target="_blank" rel="noreferrer">
+              <span class="quick-icon icon-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.4 4.4"></path></svg></span>
+              <span class="quick-card-text"><strong>Discover</strong><small>Search the web</small></span>
+              <svg class="card-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            </a>
+            <a class="quick-card glass-panel" href="https://github.com/titaniumnetwork-dev/Ultraviolet-App" target="_blank" rel="noreferrer">
+              <span class="quick-icon icon-grid"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"></rect><rect x="14" y="4" width="6" height="6" rx="1"></rect><rect x="4" y="14" width="6" height="6" rx="1"></rect><rect x="14" y="14" width="6" height="6" rx="1"></rect></svg></span>
+              <span class="quick-card-text"><strong>Project hub</strong><small>Updates & source</small></span>
+              <svg class="card-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            </a>
+            <a class="quick-card glass-panel" href="credits.html">
+              <span class="quick-icon icon-info"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 11v5M12 7.5h.01"></path></svg></span>
+              <span class="quick-card-text"><strong>Credits</strong><small>Project information</small></span>
+              <svg class="card-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            </a>
+          </div>
+        </section>
+
+        <div class="error-panel" aria-live="polite">
+          <p id="uv-error"></p>
+          <pre id="uv-error-code"></pre>
+        </div>
+      </main>
+
+      <footer class="footer glass-panel">
+        <div class="footer-brand"><span class="footer-mark">GS</span><span>ULTRAVIOLET <span class="footer-muted">/ COMMUNITY PROJECT</span></span></div>
+        <nav class="footer-links" aria-label="Project links">
+          <a title="The TitaniumNetwork GitHub organization" href="https://github.com/titaniumnetwork-dev">TitaniumNetwork</a>
+          <a title="The TitaniumNetwork Discord" href="https://discord.gg/unblock">Discord</a>
+          <a title="The TompHTTP GitHub organization" href="https://github.com/tomphttp">TompHTTP</a>
+          <a title="The official deployment repository for Ultraviolet" href="https://github.com/titaniumnetwork-dev/Ultraviolet-App">GitHub</a>
+          <a title="License information" href="credits.html">Credits</a>
+        </nav>
+        <div class="footer-copy">ULTRAVIOLET © TN 2023</div>
+      </footer>
+    </div>
+
+    <iframe style="display: none" id="uv-frame" title="Ultraviolet browsing frame"></iframe>
+    <script src="register-sw.js"></script>
+    <script src="search.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

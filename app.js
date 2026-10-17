@@ -74,6 +74,7 @@
   let playingAudio = null;
   let musicAudio = null;
   let toastTimer = null;
+  let ruffleLoading = null;
 
   function persist() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
@@ -248,20 +249,20 @@
     if (!g) { navigate('library'); toast('That game could not be found in your library.'); return; }
     setTitle(g.title);
     const favorite = state.favorites.includes(id);
-    $('#app').innerHTML = `${statusArea()}<main class="page-content">${header('Game details')}<div class="details-hero"><img class="details-art" src="${escapeHTML(gameArt(g))}" alt="${escapeHTML(g.title)} artwork" onerror="this.src='assets/covers/gsn.svg'"><section><h2 class="details-title">${escapeHTML(g.title)}</h2><div class="muted">${escapeHTML(g.developer || 'Developer not listed')}${g.releaseYear ? ` · ${g.releaseYear}` : ''}</div><div class="tag-row">${(g.genres || []).map(tag=>`<span class="tag">${escapeHTML(tag)}</span>`).join('')}${g.type==='app'?'<span class="tag">Application</span>':''}</div><p class="details-description">${escapeHTML(g.description || 'No description has been added for this item yet.')}</p><div class="details-actions"><button class="primary-button" data-action="launch" data-id="${escapeHTML(g.id)}">▶ &nbsp; ${g.launchType==='builtin'?'Play now':'Launch'}</button><button class="secondary-button" data-action="favorite" data-id="${escapeHTML(g.id)}">${favorite?'★ Remove favorite':'☆ Add to favorites'}</button><button class="secondary-button" data-action="game-options" data-id="${escapeHTML(g.id)}">More options</button></div><p class="muted" style="font-size:12px;margin-top:22px">Launch method: ${escapeHTML(g.launchType || 'url')}${g.launchType==='builtin'?' · runs inside GSN': ''}</p></section></div>${hints()}</main>`;
+    $('#app').innerHTML = `${statusArea()}<main class="page-content">${header('Game details')}<div class="details-hero"><img class="details-art" src="${escapeHTML(gameArt(g))}" alt="${escapeHTML(g.title)} artwork" onerror="this.src='assets/covers/gsn.svg'"><section><h2 class="details-title">${escapeHTML(g.title)}</h2><div class="muted">${escapeHTML(g.developer || 'Developer not listed')}${g.releaseYear ? ` · ${g.releaseYear}` : ''}</div><div class="tag-row">${(g.genres || []).map(tag=>`<span class="tag">${escapeHTML(tag)}</span>`).join('')}${g.type==='app'?'<span class="tag">Application</span>':''}</div><p class="details-description">${escapeHTML(g.description || 'No description has been added for this item yet.')}</p><div class="details-actions"><button class="primary-button" data-action="launch" data-id="${escapeHTML(g.id)}">▶ &nbsp; ${g.launchType==='builtin'?'Play now':'Launch'}</button><button class="secondary-button" data-action="favorite" data-id="${escapeHTML(g.id)}">${favorite?'★ Remove favorite':'☆ Add to favorites'}</button><button class="secondary-button" data-action="game-options" data-id="${escapeHTML(g.id)}">More options</button></div><p class="muted" style="font-size:12px;margin-top:22px">Launch method: ${escapeHTML(g.launchType || 'url')}${g.launchType==='builtin'?' · runs inside GSN':g.launchType==='swf'?' · Flash emulation via Ruffle':''}</p></section></div>${hints()}</main>`;
     applyTheme();
   }
   function renderManage() {
     setTitle('Manage games');
     const games = allGames().sort((a,b)=>a.title.localeCompare(b.title));
-    $('#app').innerHTML = `${statusArea()}<main class="page-content">${header('Manage Games')}<p class="notice">Add a game here without editing code, or update <code>data/games.json</code> in your GitHub repository. Changes made in this page are stored only in this browser until you export the JSON and commit it to GitHub.</p><div class="manage-toolbar"><button class="primary-button" data-action="new-game">＋ Add a game</button><button class="secondary-button" data-action="import-games">Import JSON</button><button class="secondary-button" data-action="export-games">Export JSON</button><button class="secondary-button" data-action="reset-game-library">Reset local game changes</button></div><input id="import-file" type="file" accept="application/json,.json" class="hidden"><div class="notice">${games.length} items in your launcher. For a browser game hosted in this repository, set launch type to <code>local-page</code> and use a path like <code>games/my-game/index.html</code>. For external games, use a full https URL.</div><div id="game-form-slot"></div><div class="manage-list">${games.map(g=>`<div class="manage-entry"><img src="${escapeHTML(gameArt(g))}" alt="" onerror="this.src='assets/covers/gsn.svg'"><div class="manage-entry-info"><strong>${escapeHTML(g.title)}</strong><span>${escapeHTML(g.type)} · ${escapeHTML(g.collection || 'No collection')} · ${escapeHTML(g.launchType || 'url')}</span></div><button data-action="edit-game" data-id="${escapeHTML(g.id)}">Edit</button><button data-action="delete-game" data-id="${escapeHTML(g.id)}">Delete</button></div>`).join('')}</div>${hints()}</main>`;
+    $('#app').innerHTML = `${statusArea()}<main class="page-content">${header('Manage Games')}<p class="notice">Add a game here without editing code, or update <code>data/games.json</code> in your GitHub repository. Changes made in this page are stored only in this browser until you export the JSON and commit it to GitHub.</p><div class="manage-toolbar"><button class="primary-button" data-action="new-game">＋ Add a game</button><button class="secondary-button" data-action="import-games">Import JSON</button><button class="secondary-button" data-action="export-games">Export JSON</button><button class="secondary-button" data-action="reset-game-library">Reset local game changes</button></div><input id="import-file" type="file" accept="application/json,.json" class="hidden"><div class="notice">${games.length} items in your launcher. For a browser game hosted in this repository, set launch type to <code>local-page</code> and use a path like <code>games/my-game/index.html</code>. For Flash games, upload the <code>.swf</code> into <code>games/my-flash-game/</code> and choose <code>Flash game (.swf)</code>. Ruffle is loaded from its official CDN when you launch a Flash game, so an internet connection is needed.</div><div id="game-form-slot"></div><div class="manage-list">${games.map(g=>`<div class="manage-entry"><img src="${escapeHTML(gameArt(g))}" alt="" onerror="this.src='assets/covers/gsn.svg'"><div class="manage-entry-info"><strong>${escapeHTML(g.title)}</strong><span>${escapeHTML(g.type)} · ${escapeHTML(g.collection || 'No collection')} · ${escapeHTML(g.launchType || 'url')}</span></div><button data-action="edit-game" data-id="${escapeHTML(g.id)}">Edit</button><button data-action="delete-game" data-id="${escapeHTML(g.id)}">Delete</button></div>`).join('')}</div>${hints()}</main>`;
     applyTheme();
   }
   function gameForm(g = {}) {
     const isEdit = !!g.id;
     editingGameId = isEdit ? g.id : '';
     const genres = (g.genres || []).join(', '), tags = (g.tags || []).join(', '), aliases = (g.aliases || []).join(', ');
-    return `<form class="manage-form" id="game-form"><label class="field">Game ID *<input name="id" required pattern="[a-zA-Z0-9_-]+" placeholder="my-awesome-game" value="${escapeHTML(g.id || '')}" ${isEdit?'readonly':''}></label><label class="field">Title *<input name="title" required placeholder="My Awesome Game" value="${escapeHTML(g.title || '')}"></label><label class="field">Type<select name="type"><option value="game" ${g.type!=='app'?'selected':''}>Game</option><option value="app" ${g.type==='app'?'selected':''}>Application</option></select></label><label class="field">Cover image path<input name="image" placeholder="assets/covers/my-game.svg" value="${escapeHTML(g.image || '')}"></label><label class="field">Developer<input name="developer" value="${escapeHTML(g.developer || '')}"></label><label class="field">Release year<input name="releaseYear" type="number" min="1970" max="2100" value="${escapeHTML(g.releaseYear || '')}"></label><label class="field">Genres (comma-separated)<input name="genres" value="${escapeHTML(genres)}" placeholder="Arcade, Platformer"></label><label class="field">Tags (comma-separated)<input name="tags" value="${escapeHTML(tags)}" placeholder="browser, action"></label><label class="field">Collection<input name="collection" value="${escapeHTML(g.collection || 'Arcade')}"></label><label class="field">Date added<input name="dateAdded" type="date" value="${escapeHTML(g.dateAdded || new Date().toISOString().slice(0,10))}"></label><label class="field">Launch type<select name="launchType"><option value="builtin" ${g.launchType==='builtin'?'selected':''}>Built-in GSN game</option><option value="url" ${!g.launchType||g.launchType==='url'?'selected':''}>External URL</option><option value="new-tab" ${g.launchType==='new-tab'?'selected':''}>Open in new tab</option><option value="iframe" ${g.launchType==='iframe'?'selected':''}>Embed in GSN (iframe)</option><option value="local-page" ${g.launchType==='local-page'?'selected':''}>Local page in this repo</option></select></label><label class="field">Launch URL / path<input name="launchUrl" required placeholder="https://example.com/game or games/my-game/index.html" value="${escapeHTML(g.launchUrl || '')}"></label><label class="field">Aliases (comma-separated)<input name="aliases" value="${escapeHTML(aliases)}"></label><label class="field">Open external URLs in new tab?<select name="openInNewTab"><option value="true" ${(g.openInNewTab!==false)?'selected':''}>Yes</option><option value="false" ${g.openInNewTab===false?'selected':''}>No (try embedded player)</option></select></label><label class="field full">Description<textarea name="description" placeholder="A short description">${escapeHTML(g.description || '')}</textarea></label><div class="form-actions"><button class="primary-button" type="submit">${isEdit?'Save changes':'Add game'}</button><button class="secondary-button" type="button" data-action="cancel-game-form">Cancel</button></div></form>`;
+    return `<form class="manage-form" id="game-form"><label class="field">Game ID *<input name="id" required pattern="[a-zA-Z0-9_-]+" placeholder="my-awesome-game" value="${escapeHTML(g.id || '')}" ${isEdit?'readonly':''}></label><label class="field">Title *<input name="title" required placeholder="My Awesome Game" value="${escapeHTML(g.title || '')}"></label><label class="field">Type<select name="type"><option value="game" ${g.type!=='app'?'selected':''}>Game</option><option value="app" ${g.type==='app'?'selected':''}>Application</option></select></label><label class="field">Cover image path<input name="image" placeholder="assets/covers/my-game.svg" value="${escapeHTML(g.image || '')}"></label><label class="field">Developer<input name="developer" value="${escapeHTML(g.developer || '')}"></label><label class="field">Release year<input name="releaseYear" type="number" min="1970" max="2100" value="${escapeHTML(g.releaseYear || '')}"></label><label class="field">Genres (comma-separated)<input name="genres" value="${escapeHTML(genres)}" placeholder="Arcade, Platformer"></label><label class="field">Tags (comma-separated)<input name="tags" value="${escapeHTML(tags)}" placeholder="browser, action"></label><label class="field">Collection<input name="collection" value="${escapeHTML(g.collection || 'Arcade')}"></label><label class="field">Date added<input name="dateAdded" type="date" value="${escapeHTML(g.dateAdded || new Date().toISOString().slice(0,10))}"></label><label class="field">Launch type<select name="launchType"><option value="builtin" ${g.launchType==='builtin'?'selected':''}>Built-in GSN game</option><option value="url" ${!g.launchType||g.launchType==='url'?'selected':''}>External URL</option><option value="new-tab" ${g.launchType==='new-tab'?'selected':''}>Open in new tab</option><option value="iframe" ${g.launchType==='iframe'?'selected':''}>Embed in GSN (iframe)</option><option value="local-page" ${g.launchType==='local-page'?'selected':''}>Local page in this repo</option><option value="swf" ${g.launchType==='swf'?'selected':''}>Flash game (.swf) via Ruffle</option></select></label><label class="field">Launch URL / path<input name="launchUrl" required placeholder="games/my-flash-game/game.swf" value="${escapeHTML(g.launchUrl || '')}"></label><label class="field">Aliases (comma-separated)<input name="aliases" value="${escapeHTML(aliases)}"></label><label class="field">Open external URLs in new tab?<select name="openInNewTab"><option value="true" ${(g.openInNewTab!==false)?'selected':''}>Yes</option><option value="false" ${g.openInNewTab===false?'selected':''}>No (try embedded player)</option></select></label><label class="field full">Description<textarea name="description" placeholder="A short description">${escapeHTML(g.description || '')}</textarea></label><div class="form-actions"><button class="primary-button" type="submit">${isEdit?'Save changes':'Add game'}</button><button class="secondary-button" type="button" data-action="cancel-game-form">Cancel</button></div></form>`;
   }
   function renderFriends() {
     setTitle('Friends & account');
@@ -325,6 +326,10 @@
     if (!target || !validLaunchTarget(target, g.launchType)) {
       toast('This game does not have a valid launch URL yet. Update it in Manage Games.'); return;
     }
+    if (g.launchType === 'swf') {
+      launchSwfGame(g, resolveProjectPath(target));
+      return;
+    }
     if (/^https?:\/\//i.test(target) && (g.launchType === 'new-tab' || (g.openInNewTab !== false && g.launchType !== 'iframe'))) {
       const win = window.open(target, '_blank', 'noopener,noreferrer');
       if (win) toast(`Opening ${g.title} in a new tab.`);
@@ -338,8 +343,61 @@
   }
   function validLaunchTarget(target, type) {
     if (type === 'builtin') return target === 'snake';
+    if (type === 'swf') {
+      const isHttp = /^https?:\/\//i.test(target);
+      const isProjectPath = /^(\.\/|\.\.\/|[a-zA-Z0-9_.-]+\/)/.test(target) && !target.includes('..//');
+      return /\.swf(?:[?#].*)?$/i.test(target) && (isHttp || isProjectPath) && !target.toLowerCase().startsWith('javascript:');
+    }
     if (/^https?:\/\//i.test(target)) return true;
     return /^(\.\/|\.\.\/|[a-zA-Z0-9_.-]+\/)/.test(target) && !target.includes('..//') && !target.toLowerCase().startsWith('javascript:');
+  }
+
+  function ensureRuffle() {
+    if (window.RufflePlayer && typeof window.RufflePlayer.newest === 'function') return Promise.resolve();
+    if (ruffleLoading) return ruffleLoading;
+    ruffleLoading = new Promise((resolve, reject) => {
+      const existing = document.querySelector('script[data-gsn-ruffle]');
+      const script = existing || document.createElement('script');
+      const cleanup = () => { script.removeEventListener('load', onLoad); script.removeEventListener('error', onError); };
+      const onLoad = () => {
+        cleanup();
+        if (window.RufflePlayer && typeof window.RufflePlayer.newest === 'function') resolve();
+        else { script.remove(); reject(new Error('Ruffle loaded but its player API was not found.')); }
+      };
+      const onError = () => { cleanup(); script.remove(); reject(new Error('Could not load Ruffle from its CDN.')); };
+      script.addEventListener('load', onLoad, { once: true });
+      script.addEventListener('error', onError, { once: true });
+      if (!existing) {
+        script.src = 'https://unpkg.com/@ruffle-rs/ruffle';
+        script.async = true;
+        script.dataset.gsnRuffle = 'true';
+        document.head.appendChild(script);
+      }
+    }).catch(err => { ruffleLoading = null; throw err; });
+    return ruffleLoading;
+  }
+
+  async function launchSwfGame(game, targetUrl) {
+    const wrapper = showOverlay(game.title, `<p class="muted" style="margin-top:0">Flash game running through Ruffle. Older Flash features may not work perfectly. Keep the <code>.swf</code> file and any required game assets together in the repository.</p><div id="ruffle-player-host" class="ruffle-player-host"><div class="empty-state"><strong>Loading Flash player…</strong><span>Connecting to Ruffle and loading the game.</span></div></div><p><a href="${escapeHTML(targetUrl)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Open the SWF file directly ↗</a></p>`, 'swf-modal');
+    const host = $('#ruffle-player-host', wrapper);
+    try {
+      await ensureRuffle();
+      if (!wrapper.isConnected || !host) return;
+      const ruffle = window.RufflePlayer.newest();
+      const player = ruffle.createPlayer();
+      player.classList.add('ruffle-player');
+      player.style.display = 'block';
+      player.style.width = '100%';
+      player.style.height = 'min(68vh, 760px)';
+      player.style.background = '#090909';
+      host.replaceChildren(player);
+      await player.ruffle().load(targetUrl);
+    } catch (error) {
+      console.error('GSN could not launch this SWF:', error);
+      if (wrapper.isConnected && host) {
+        host.innerHTML = `<div class="empty-state"><strong>Flash player could not start</strong><span>${escapeHTML(error.message || 'Unknown error')} Check your internet connection, the SWF path, and whether the file exists in the repository.</span><button class="secondary-button" data-action="retry-swf" data-url="${escapeHTML(targetUrl)}" data-id="${escapeHTML(game.id)}">Try again</button></div>`;
+      }
+    }
   }
   function resolveProjectPath(target) {
     if (/^https?:\/\//i.test(target)) return target;
@@ -480,6 +538,7 @@
       case 'back': { if(overlayOpen){closeOverlay();break;} if(history.length>1)history.back();else navigate('home');break; }
       case 'open-game': openGame(id);break;
       case 'launch': closeOverlay(); launchGame(id);break;
+      case 'retry-swf': { const game=getGame(id), url=target.dataset.url; if(game&&url) launchSwfGame(game,url); break; }
       case 'favorite': { const hadOverlay=overlayOpen; if(hadOverlay)closeOverlay(); toggleFavorite(id); if(route().startsWith('game/'))renderGameDetails(id);else if(route()==='profile')renderProfile();else if(route()==='manage')renderManage();else render();break; }
       case 'game-options': openGameOptions(id);break;
       case 'edit-game-from-details': closeOverlay(); navigate('manage'); setTimeout(()=>editGame(id),0);break;

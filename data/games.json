@@ -181,5 +181,31 @@
       "bloons",
       "bloons tower defense"
     ]
+  },
+  {
+    "id": "tiq",
+    "title": "The Impossible Quiz",
+    "type": "game",
+    "image": "games/2048/favicon.ico",
+    "description": "The Impossible Quiz the hardest game.",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Platformers",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "html/impossiblequiz.html",
+    "openInNewTab": true,
+    "aliases": [
+      "the impossible quiz",
+      "tiq"
+    ]
   }
 ]

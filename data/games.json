@@ -3,7 +3,7 @@
     "id": "2048",
     "title": "2048",
     "type": "game",
-    "image": "assets/covers/ovo.svg",
+    "image": "games/2048/favicon.ico",
     "description": "Just nice classic 2048.",
     "developer": "yabo",
     "releaseYear": null,
@@ -19,7 +19,7 @@
     "collection": "Platformers",
     "dateAdded": "2026-10-17",
     "launchType": "url",
-    "launchUrl": "games/2048/favicon.ico",
+    "launchUrl": "games/2048/index.html",
     "openInNewTab": true,
     "aliases": [
       "2048",

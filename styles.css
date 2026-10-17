@@ -9,3 +9,39 @@
 /* GSN home refinements: keep the featured tile large but only accent it on interaction. */
 .feature-tile.is-featured:hover { transform: translateY(-5px); }
 .top-nav, .round-nav { -webkit-tap-highlight-color: transparent; }
+
+/* GSN home game artwork: increase tile dimensions by 25% at each breakpoint. */
+.feature-tile {
+  width: 175px;
+  height: 175px;
+  flex-basis: 175px;
+}
+.feature-tile.is-featured {
+  width: 281px;
+  height: 281px;
+  flex-basis: 281px;
+}
+@media (max-width: 1050px) {
+  .feature-tile {
+    width: 156px;
+    height: 156px;
+    flex-basis: 156px;
+  }
+  .feature-tile.is-featured {
+    width: 231px;
+    height: 231px;
+    flex-basis: 231px;
+  }
+}
+@media (max-width: 720px) {
+  .feature-tile {
+    width: 119px;
+    height: 119px;
+    flex-basis: 119px;
+  }
+  .feature-tile.is-featured {
+    width: 188px;
+    height: 188px;
+    flex-basis: 188px;
+  }
+}

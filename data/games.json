@@ -155,5 +155,31 @@
       "bloons tower defense 1",
       "td"
     ]
+  },
+  {
+    "id": "bt2",
+    "title": "Bloons TD2",
+    "type": "game",
+    "image": "games/2048/favicon.ico",
+    "description": "Just nice classic 2048.",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Platformers",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "html/btd2.html",
+    "openInNewTab": true,
+    "aliases": [
+      "bloons",
+      "bloons tower defense"
+    ]
   }
 ]

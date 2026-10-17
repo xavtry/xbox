@@ -25,5 +25,30 @@
       "2048",
       "two zero four eight"
     ]
+  },
+  {
+    "id": "mc26",
+    "title": "Minecraft 26.2",
+    "image": "assets/covers/mc.avif",
+    "description": "Minecraft 26.2, dont ask how...",
+    "developer": "Mojang",
+    "releaseYear": "2026",
+    "genres": [
+      "Sandbox",
+      "skill"
+    ],
+    "tags": [
+      "sandbox"
+      ]
+    "collection": "Sandbox",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "eaglercraft26-2.html",
+    "openInNewTab": "true",
+    "aliases": [
+      "mc",
+      "Minecraft",
+      "26.3"
+    ]
   }
 ]

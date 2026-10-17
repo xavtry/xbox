@@ -51,5 +51,31 @@
       "Minecraft",
       "26.3"
     ]
+  },
+  {
+    "id": "cookie-clicker",
+    "title": "Cookie Clicker",
+    "type": "game",
+    "image": "assets/cc.png",
+    "description": "Just nice classic 2048.",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Clicker",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "games/cookclicker/index.html",
+    "openInNewTab": true,
+    "aliases": [
+      "Cookie Clicker",
+      "click cookie"
+    ]
   }
 ]

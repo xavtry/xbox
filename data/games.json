@@ -258,5 +258,30 @@
     "aliases": [
       "portal"
     ]
+  },
+   {
+    "id": "1o1s",
+    "title": "1on1 Soccer",
+    "type": "game",
+    "image": "assets/covers/1on1.jpg",
+    "description": "1on1 soccer.",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Platformers",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "games/1on1soccer.swf",
+    "openInNewTab": true,
+    "aliases": [
+      "1on1 soccer"
+    ]
   }
 ]

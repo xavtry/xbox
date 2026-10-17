@@ -334,5 +334,31 @@
       "burrito bison",
       "bb"
     ]
+  },
+   {
+    "id": "tf",
+    "title": "Tiny Fishing",
+    "type": "game",
+    "image": "games/TinyFishing/icon.png",
+    "description": "Really small fishing.",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Platformers",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "games/TinyFishing/index.html",
+    "openInNewTab": true,
+    "aliases": [
+      "tf",
+      "tiny fishing"
+    ]
   }
 ]

@@ -45,3 +45,9 @@
     flex-basis: 188px;
   }
 }
+
+
+/* Hover border only: remove the accent outline after the pointer leaves a home game tile. */
+.feature-row .feature-tile:focus-visible:not(:hover) { outline: none; box-shadow: 0 12px 30px #0006; }
+.feature-row .feature-tile.is-featured:not(:hover) { box-shadow: 0 12px 30px #0006; }
+.feature-row .feature-tile:hover { outline: none; box-shadow: 0 0 0 3px var(--accent), 0 12px 30px #0006; }

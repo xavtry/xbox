@@ -186,7 +186,7 @@
     "id": "tiq",
     "title": "The Impossible Quiz",
     "type": "game",
-    "image": "games/2048/favicon.ico",
+    "image": "assets/covers/tiq.jpg",
     "description": "The Impossible Quiz the hardest game.",
     "developer": "yabo",
     "releaseYear": null,
@@ -206,6 +206,32 @@
     "aliases": [
       "the impossible quiz",
       "tiq"
+    ]
+  },
+    {
+    "id": "pacman",
+    "title": "PacMan",
+    "type": "game",
+    "image": "assets/covers/images (27).jpg",
+    "description": "The Impossible Quiz the hardest game.",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Platformers",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "games/pacman/index.html",
+    "openInNewTab": true,
+    "aliases": [
+      "pac man",
+      "pacman"
     ]
   }
 ]

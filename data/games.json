@@ -160,7 +160,7 @@
     "id": "bt2",
     "title": "Bloons TD2",
     "type": "game",
-    "image": "games/2048/favicon.ico",
+    "image": "assets/covers/btd2.jpg",
     "description": "Just nice classic 2048.",
     "developer": "yabo",
     "releaseYear": null,

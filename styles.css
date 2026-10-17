@@ -51,3 +51,34 @@
 .feature-row .feature-tile:focus-visible:not(:hover) { outline: none; box-shadow: 0 12px 30px #0006; }
 .feature-row .feature-tile.is-featured:not(:hover) { box-shadow: 0 12px 30px #0006; }
 .feature-row .feature-tile:hover { outline: none; box-shadow: 0 0 0 3px var(--accent), 0 12px 30px #0006; }
+
+/* GSN: draw a complete hover border inside each home game tile. The extra
+   top padding prevents the row's horizontal-scroll viewport clipping the
+   border when a tile lifts on hover. */
+.feature-row {
+  padding-top: 12px;
+}
+.feature-row .feature-tile {
+  position: relative;
+}
+.feature-row .feature-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  border: 3px solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: border-color .18s ease;
+}
+.feature-row .feature-tile:hover::after {
+  border-color: var(--accent);
+}
+.feature-row .feature-tile:hover {
+  outline: none;
+  box-shadow: 0 12px 30px #0006;
+}
+.feature-row .feature-tile:focus-visible:not(:hover) {
+  outline: none;
+  box-shadow: 0 12px 30px #0006;
+}

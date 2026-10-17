@@ -283,5 +283,30 @@
     "aliases": [
       "1on1 soccer"
     ]
+  },
+   {
+    "id": "sb",
+    "title": "Sandboxels",
+    "type": "game",
+    "image": "assets/covers/images (28).jpg",
+    "description": "Sand and a box.",
+    "developer": "yabo",
+    "releaseYear": null,
+    "genres": [
+      "Puzzle",
+      "Strategy"
+    ],
+    "tags": [
+      "puzzle",
+      "browser"
+    ],
+    "collection": "Platformers",
+    "dateAdded": "2026-10-17",
+    "launchType": "local-page",
+    "launchUrl": "games/sandboxels/index.html",
+    "openInNewTab": true,
+    "aliases": [
+      "sandboxels"
+    ]
   }
 ]
